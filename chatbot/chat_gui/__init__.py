@@ -4,7 +4,19 @@ from tkinter import Tk, Canvas, Frame, Label, \
 from tkinter.constants import DISABLED, NORMAL, RIGHT
 from threading import Thread, Event
 from time import sleep
-from googletrans import Translator
+from deep_translator import GoogleTranslator
+
+
+translator_en_kr = GoogleTranslator(source='en', target='korean')
+translator_kr_en = GoogleTranslator(source='korean', target='en')
+
+
+def translate_en_kr(message):
+    return translator_en_kr.translate(message)
+
+
+def translate_kr_en(message):
+    return translator_kr_en.translate(message)
 
 
 class ChatGUI:
@@ -157,16 +169,15 @@ class ChatGUI:
         """
         Call the bot handler and add the result to bot_message
         """
-        translator = Translator()
 
         # Translate user message to English
-        translated_message = translator.translate(message, src='ko', dest='en').text
+        translated_message = translate_kr_en(message)
 
         # Generate bot response
         bot_message = self.callback(translated_message)
 
         # Translate bot response to Korean
-        translated_bot_message = translator.translate(bot_message, src='en', dest='ko').text
+        translated_bot_message = translate_en_kr(bot_message)
 
         while not self.thread_event.is_set():
             sleep(0.1)
