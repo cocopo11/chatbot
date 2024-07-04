@@ -1,8 +1,19 @@
 from chatbot import Chat, register_call
 import os
-
 import warnings
+import wikipedia
+
 warnings.filterwarnings("ignore")
+
+
+
+@register_call("wiki")
+def who_is(session=None, query='South Korea'):
+    try:
+        return wikipedia.summary(query)
+    except Exception:
+        pass
+    return "I don't know about " + query
 
 
 @register_call("do_you_know")
