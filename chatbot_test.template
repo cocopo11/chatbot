@@ -1,6 +1,12 @@
 {% block %}
-    {% client %}(Do you know|Do you have any idea) (?P<query>.*){% endclient %}
-    {% response %}{% call do_you_know: %query %}{% endresponse %}
+    {% client %}(Do you know about|who is|what is) (?P<query>.*){% endclient %}
+    {% response %}{% call wiki: %query %}{% endresponse %}
+{% endblock %}
+
+
+{% block %}
+{% client %}(Do you know) (?P<query>.*){% endclient %}
+{% response %}{% call do_you_know: %query %}{% endresponse %}
 {% endblock %}
 
 {% block %}

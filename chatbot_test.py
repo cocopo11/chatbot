@@ -2,10 +2,20 @@ import python_weather
 from chatbot import Chat, register_call
 import asyncio
 import os
-
 import warnings
+import wikipedia
+
 warnings.filterwarnings("ignore")
 
+
+
+@register_call("wiki")
+def who_is(session=None, query='South Korea'):
+    try:
+        return wikipedia.summary(query)
+    except Exception:
+        pass
+    return "I don't know about " + query
 
 async def get_weather(city='New York'):
     global weather_string
