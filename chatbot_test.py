@@ -13,3 +13,6 @@ def do_you_know(session=None, query=None):
 first_question = "Hi, how are you?"
 chat = Chat(os.path.join(os.path.dirname(os.path.abspath(__file__)), "chatbot_test.template"))
 chat.converse(first_question)
+
+def weather(session, city):
+    return call_weather(session, city)

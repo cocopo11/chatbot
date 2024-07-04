@@ -20,7 +20,7 @@ def call_weather(session=None, city='New York'):
     try:
         if os.name == 'nt':
             asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-        asyncio.run(get_weather())
+        asyncio.run(get_weather(city))
     except Exception:
         weather_string = "I do not know the weather"
     return weather_string
